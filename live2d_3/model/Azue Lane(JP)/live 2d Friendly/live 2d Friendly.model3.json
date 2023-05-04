@@ -1,0 +1,9 @@
+{
+  "Version": 3,
+  "FileReferences": {
+    "Moc": "live 2d Friendly.moc3",
+    "Textures": ["live 2d Friendly.1024/texture_00.png"],
+    "DisplayInfo": "live 2d Friendly.cdi3.json",
+    "Physics": "chuixue_3.physics3.json"
+  }
+}
