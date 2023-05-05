@@ -156,6 +156,10 @@
 			"Name": "Leg"
 		},
 		{
+			"Id": "Part3",
+			"Name": "Parts12"
+		},
+		{
 			"Id": "Eyes",
 			"Name": "Eyes"
 		},
