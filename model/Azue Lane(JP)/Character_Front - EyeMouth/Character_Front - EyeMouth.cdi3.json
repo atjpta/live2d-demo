@@ -160,12 +160,12 @@
 			"Name": "Eyes"
 		},
 		{
-			"Id": "Details",
-			"Name": "Details"
+			"Id": "Mouth2",
+			"Name": "Mouth"
 		},
 		{
-			"Id": "Details2",
-			"Name": "Details"
+			"Id": "Main2",
+			"Name": "Main"
 		},
 		{
 			"Id": "Left",
@@ -177,11 +177,29 @@
 		},
 		{
 			"Id": "Part",
-			"Name": "Hand copy 2"
+			"Name": "Group 3"
 		},
 		{
 			"Id": "Part2",
-			"Name": "Hand "
+			"Name": "Group 2"
+		},
+		{
+			"Id": "Part3",
+			"Name": "Group 1"
+		},
+		{
+			"Id": "Part4",
+			"Name": "Hand copy 2"
+		},
+		{
+			"Id": "Part5",
+			"Name": "Hand"
 		}
+	],
+	"CombinedParameters": [
+		[
+			"ParamEyeBallX",
+			"ParamEyeBallY"
+		]
 	]
 }

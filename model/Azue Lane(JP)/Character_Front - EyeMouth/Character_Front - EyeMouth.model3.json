@@ -1,10 +1,10 @@
 {
   "Version": 3,
   "FileReferences": {
-    "Moc": "live 2d Friendly.moc3",
-    "Textures": ["live 2d Friendly.1024/texture_00.png"],
-    "Physics": "live 2d Friendly.physics3.json",
-    "DisplayInfo": "live 2d Friendly.cdi3.json",
+    "Moc": "Character_Front - EyeMouth.moc3",
+    "Textures": ["Character_Front - EyeMouth.1024/texture_00.png"],
+    "Physics": "xixuegui_4.physics3.json",
+    "DisplayInfo": "Character_Front - EyeMouth.cdi3.json",
     "Motions": {
       "": [
         {
@@ -13,7 +13,6 @@
       ]
     }
   },
-
   "Groups": [
     {
       "Target": "Parameter",
