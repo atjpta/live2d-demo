@@ -1,0 +1,18 @@
+{
+	"Version": 3,
+	"FileReferences": {
+		"Moc": "Cat-Character-2.moc3",
+		"Textures": [
+			"Cat-Character-2.1024/texture_00.png"
+		],
+		"Physics": "xixuegui_4.physics3.json",
+		"DisplayInfo": "Cat-Character-2.cdi3.json",
+		"Motions": {
+			"": [
+				{
+					"File": "motions/idle.motion3.json"
+				}
+			]
+		}
+	}
+}
