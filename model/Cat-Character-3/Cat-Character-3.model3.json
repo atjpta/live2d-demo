@@ -1,0 +1,30 @@
+{
+	"Version": 3,
+	"FileReferences": {
+		"Moc": "Cat-Character-3.moc3",
+		"Textures": [
+			"Cat-Character-3.1024/texture_00.png"
+		],
+		"Motions": {
+			"": [
+				{
+					"File": "motions/idle.motion3.json"
+				}
+			]
+		},
+		"Physics": "dafeng_2.physics3.json",
+		"DisplayInfo": "Cat-Character-3.cdi3.json"
+	},
+	"Groups": [
+		{
+			"Target": "Parameter",
+			"Name": "EyeBlink",
+			"Ids": []
+		},
+		{
+			"Target": "Parameter",
+			"Name": "LipSync",
+			"Ids": []
+		}
+	]
+}
