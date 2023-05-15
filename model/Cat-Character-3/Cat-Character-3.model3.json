@@ -5,12 +5,21 @@
 		"Textures": [
 			"Cat-Character-3.1024/texture_00.png"
 		],
-		"Physics": "xixuegui_4.physics3.json",
+		"Physics": "Cat-Character-3.physics3.json",
 		"DisplayInfo": "Cat-Character-3.cdi3.json",
 		"Motions": {
 			"": [
 				{
 					"File": "motions/idle.motion3.json"
+				},
+				{
+					"File": "motions/touch_Body.motion3.json"
+				},
+				{
+					"File": "motions/touch_Mouth.motion3.json"
+				},
+				{
+					"File": "motions/touch_Arm.motion3.json"
 				}
 			]
 		}
@@ -18,13 +27,23 @@
 	"Groups": [
 		{
 			"Target": "Parameter",
-			"Name": "EyeBlink",
+			"Name": "LipSync",
 			"Ids": []
 		},
 		{
 			"Target": "Parameter",
-			"Name": "LipSync",
+			"Name": "EyeBlink",
 			"Ids": []
+		}
+	],
+	"HitAreas": [
+		{
+			"Id": "HitAreaHead",
+			"Name": "Head"
+		},
+		{
+			"Id": "HitAreaBody",
+			"Name": "Body"
 		}
 	]
 }

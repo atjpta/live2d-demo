@@ -5,7 +5,7 @@ $(document).ready(() => {
 });
 
 class Viewer {
-    constructor (basePath) {
+    constructor(basePath) {
         this.l2d = new L2D(basePath);
 
         this.canvas = $(".Canvas");
@@ -14,7 +14,7 @@ class Viewer {
 
         let stringCharacter = "<option>Select</option>";
         for (let val in charData) {
-            stringCharacter+= '<option value="' + charData[val] + '">' + val + '</option>';
+            stringCharacter += '<option value="' + charData[val] + '">' + val + '</option>';
         }
         this.selectCharacter.html(stringCharacter);
         this.selectCharacter.change((event) => {
@@ -37,7 +37,6 @@ class Viewer {
             if (!this.model) {
                 return;
             }
-
             this.model.update(deltaTime);
             this.model.masks.update(this.app.renderer);
         });
@@ -54,12 +53,15 @@ class Viewer {
                 this.model.scale = new PIXI.Point((this.model.position.x * 0.06), (this.model.position.x * 0.06));
                 this.model.masks.resize(this.app.view.width, this.app.view.height);
             }
-            if(this.model.height <= 200) {
+            if (this.model.height <= 200) {
                 this.model.scale = new PIXI.Point((this.model.position.x * 0.6), (this.model.position.x * 0.6));
             }
         };
         this.isClick = false;
         this.app.view.addEventListener('mousedown', (event) => {
+            this.isClick = true;
+        });
+        this.app.view.addEventListener('touchstart', (event) => {
             this.isClick = true;
         });
         this.app.view.addEventListener('mousemove', (event) => {
@@ -77,29 +79,97 @@ class Viewer {
                 this.model.pointerY = -mouse_y / this.app.view.width;
             }
         });
+        this.app.view.addEventListener('touchmove', (event) => {
+            event.preventDefault(); // ngăn chặn cuộn trang
+            if (this.isClick) {
+                this.isClick = false;
+                if (this.model) {
+                    this.model.inDrag = true;
+                }
+            }
+
+            if (this.model && event.touches[0]) { // sử dụng touch thứ nhất
+                let touch_x = this.model.position.x - event.touches[0].pageX;
+                let touch_y = this.model.position.y - event.touches[0].pageY;
+                this.model.pointerX = -touch_x / this.app.view.height;
+                this.model.pointerY = -touch_y / this.app.view.width;
+            }
+        });
+
+
         this.app.view.addEventListener('mouseup', (event) => {
             if (!this.model) {
                 return;
             }
-
+            const x = event.offsetX
+            const y = event.offsetY
             if (this.isClick) {
-                if (this.isHit('TouchHead', event.offsetX, event.offsetY)) {
-                    this.startAnimation("touch_head", "base");
-                } else if (this.isHit('TouchSpecial', event.offsetX, event.offsetY)) {
-                    this.startAnimation("touch_special", "base");
-                } else {
-                    const bodyMotions = ["touch_body", "main_1", "main_2", "main_3"];
-                    let currentMotion = bodyMotions[Math.floor(Math.random()*bodyMotions.length)];
-                    this.startAnimation(currentMotion, "base");
+                if (this.isHit('head', event.offsetX, event.offsetY)) {
+                    this.startAnimation("touch_Mouth", "base");
                 }
+                else if (this.isHit('ArtMesh8', x, y)) {
+                    this.startAnimation("touch_Arm", "base");
+                }
+                else if (this.isHit('ArtMesh9', x, y)) {
+                    this.startAnimation("touch_Arm", "base");
+                }
+                else if (this.isHit('body', event.offsetX, event.offsetY)) {
+                    this.startAnimation("touch_Body", "base");
+                }
+
+                // else if (this.isHit('TouchSpecial', event.offsetX, event.offsetY)) {
+                //     this.startAnimation("touch_special", "base");
+                // }
+                // else {
+                //     const bodyMotions = ["touch_body", "touch_Body", "touch_Body", "touch_Body"];
+                //     let currentMotion = bodyMotions[Math.floor(Math.random() * bodyMotions.length)];
+                //     this.startAnimation(currentMotion, "base");
+                // }
+            }
+
+            this.isClick = false;
+            this.model.inDrag = false;
+
+        });
+
+        this.app.view.addEventListener('touchend', (event) => {
+            if (!this.model) {
+                return;
+            }
+            const x = event.changedTouches[0].pageX
+            const y = event.changedTouches[0].pageY
+            if (this.isClick) {
+                if (this.isHit('head', x, y)) {
+                    this.startAnimation("touch_Mouth", "base");
+                }
+                else if (this.isHit('body', x, y)) {
+                    this.startAnimation("touch_Body", "base");
+                }
+                else if (this.isHit('ArtMesh8', x, y)) {
+                    this.startAnimation("touch_Arm", "base");
+                }
+                else if (this.isHit('ArtMesh9', x, y)) {
+                    this.startAnimation("touch_Arm", "base");
+                }
+                // else if (this.isHit('TouchSpecial', event.changedTouches[0].pageX, event.changedTouches[0].pageY)) {
+                //     this.startAnimation("touch_special", "base");
+                // }
+                // else {
+                //     const bodyMotions = ["touch_body", "touch_Body", "touch_Body", "touch_Body"];
+                //     let currentMotion = bodyMotions[Math.floor(Math.random() * bodyMotions.length)];
+                //     this.startAnimation(currentMotion, "base");
+                //     console.log(touch_body);
+                // }
             }
 
             this.isClick = false;
             this.model.inDrag = false;
         });
+
+
     }
 
-    changeCanvas (model) {
+    changeCanvas(model) {
         this.app.stage.removeChildren();
 
         this.selectAnimation.empty();
@@ -126,7 +196,7 @@ class Viewer {
         window.onresize();
     }
 
-    onUpdate (delta) {
+    onUpdate(delta) {
         let deltaTime = 0.016 * delta;
 
         if (!this.animator.isPlaying) {
@@ -134,7 +204,6 @@ class Viewer {
             this.animator.getLayer("base").play(m);
         }
         this._animator.updateAndEvaluate(deltaTime);
-
         if (this.inDrag) {
             this.addParameterValueById("ParamAngleX", this.pointerX * 30);
             this.addParameterValueById("ParamAngleY", -this.pointerY * 30);
@@ -177,7 +246,7 @@ class Viewer {
         this._coreModel.drawables.resetDynamicFlags();
     }
 
-    startAnimation (motionId, layerId) {
+    startAnimation(motionId, layerId) {
         if (!this.model) {
             return;
         }
@@ -186,6 +255,7 @@ class Viewer {
         if (!m) {
             return;
         }
+        m.loop = false
 
         let l = this.model.animator.getLayer(layerId);
         if (!l) {
@@ -193,14 +263,18 @@ class Viewer {
         }
 
         l.play(m);
+
     }
 
-    isHit (id, posX, posY) {
+
+
+    isHit(id, posX, posY) {
         if (!this.model) {
             return false;
         }
 
         let m = this.model.getModelMeshById(id);
+        // console.log(m);
         if (!m) {
             return false;
         }
@@ -208,7 +282,6 @@ class Viewer {
         const vertexOffset = 0;
         const vertexStep = 2;
         const vertices = m.vertices;
-
         let left = vertices[0];
         let right = vertices[0];
         let top = vertices[1];
@@ -236,7 +309,9 @@ class Viewer {
         let mouse_y = m.worldTransform.ty - posY;
         let tx = -mouse_x / m.worldTransform.a;
         let ty = -mouse_y / m.worldTransform.d;
-
-        return ((left <= tx) && (tx <= right) && (top <= ty) && (ty <= bottom));
+        let kq = ((left <= tx) && (tx <= right) && (top <= ty) && (ty <= bottom))
+        return kq
     }
+
+
 }
