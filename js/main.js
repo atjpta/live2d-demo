@@ -7,27 +7,17 @@ $(document).ready(() => {
 class Viewer {
     constructor(basePath) {
         this.l2d = new L2D(basePath);
-
         this.canvas = $(".Canvas");
         this.selectCharacter = $(".selectCharacter");
         this.selectAnimation = $(".selectAnimation");
-
-        let stringCharacter = "<option>Select</option>";
-        for (let val in charData) {
-            stringCharacter += '<option value="' + charData[val] + '">' + val + '</option>';
-        }
-        this.selectCharacter.html(stringCharacter);
-        this.selectCharacter.change((event) => {
-            if (event.target.selectedIndex == 0) {
-                return;
-            }
-            let name = event.target.value;
-            this.l2d.load(name, this);
-        });
+        let queryString = window.location.search.substring(1);
+        this.l2d.load(queryString, this);
+        console.log(charData);
 
         this.app = new PIXI.Application(1280, 720, { backgroundColor: 0xffffff });
         let width = window.innerWidth;
-        let height = (width / 16.0) * 9.0;
+        // let height = (width / 16.0) * 9.0;
+        let height = window.innerHeight;
         this.app.view.style.width = width + "px";
         this.app.view.style.height = height + "px";
         this.app.renderer.resize(width, height);
@@ -43,14 +33,16 @@ class Viewer {
         window.onresize = (event) => {
             if (event === void 0) { event = null; }
             let width = window.innerWidth;
-            let height = (width / 16.0) * 9.0;
+            // let height = (width / 16.0) * 9.0;
+            let height = window.innerHeight
+
             this.app.view.style.width = width + "px";
             this.app.view.style.height = height + "px";
             this.app.renderer.resize(width, height);
 
             if (this.model) {
                 this.model.position = new PIXI.Point((width * 0.5), (height * 0.5));
-                this.model.scale = new PIXI.Point((this.model.position.x * 0.06), (this.model.position.x * 0.06));
+                this.model.scale = new PIXI.Point((this.model.position.x * 2), (this.model.position.x * 2));
                 this.model.masks.resize(this.app.view.width, this.app.view.height);
             }
             if (this.model.height <= 200) {
