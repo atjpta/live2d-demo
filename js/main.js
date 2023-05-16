@@ -14,7 +14,7 @@ class Viewer {
         this.l2d.load(queryString, this);
         console.log(charData);
 
-        this.app = new PIXI.Application(1280, 720, { backgroundColor: 0xffffff });
+        this.app = new PIXI.Application(1280, 720, { backgroundColor: 0x636363 });
         let width = window.innerWidth;
         // let height = (width / 16.0) * 9.0;
         let height = window.innerHeight;
@@ -42,7 +42,7 @@ class Viewer {
 
             if (this.model) {
                 this.model.position = new PIXI.Point((width * 0.5), (height * 0.5));
-                this.model.scale = new PIXI.Point((this.model.position.x * 2), (this.model.position.x * 2));
+                this.model.scale = new PIXI.Point((this.model.position.x * 2.5), (this.model.position.x * 2.5));
                 this.model.masks.resize(this.app.view.width, this.app.view.height);
             }
             if (this.model.height <= 200) {
