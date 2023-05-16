@@ -4,6 +4,10 @@ $(document).ready(() => {
     v = new Viewer('model');
 });
 
+const onSpeaking = () => {
+    v.speaking();
+}
+
 class Viewer {
     constructor(basePath) {
         this.l2d = new L2D(basePath);
@@ -29,6 +33,7 @@ class Viewer {
             }
             this.model.update(deltaTime);
             this.model.masks.update(this.app.renderer);
+            // this.model.rotation -= 0.01 * deltaTime;
         });
         window.onresize = (event) => {
             if (event === void 0) { event = null; }
@@ -41,12 +46,17 @@ class Viewer {
             this.app.renderer.resize(width, height);
 
             if (this.model) {
+                // console.log(window.innerWidth);
+                // console.log(window.innerWidth);
                 // const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
                 // if (isMobile) {
+                //     console.log('isMobile');
                 //     this.model.position = new PIXI.Point((width * 0.5), (height * 0.5));
                 //     this.model.scale = new PIXI.Point((this.model.position.x * 2.5), (this.model.position.x * 2.5));
                 //     this.model.masks.resize(this.app.view.width, this.app.view.height);
                 // } else {
+                //     console.log('isDesktop');
+
                 //     this.model.position = new PIXI.Point((width * 0.5), (height * 0.4));
                 //     this.model.scale = new PIXI.Point((this.model.position.x * 1.2), (this.model.position.x * 1.2));
                 //     this.model.masks.resize(this.app.view.width, this.app.view.height);
@@ -271,6 +281,9 @@ class Viewer {
 
     }
 
+    speaking() {
+        this.startAnimation("touch_Mouth", "base");
+    }
 
 
     isHit(id, posX, posY) {
