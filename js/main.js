@@ -8,6 +8,11 @@ const onSpeaking = () => {
     v.speaking();
 }
 
+const stopSpeaking = () => {
+    v.stopSpeaking();
+}
+
+
 class Viewer {
     constructor(basePath) {
         this.l2d = new L2D(basePath);
@@ -282,8 +287,29 @@ class Viewer {
     }
 
     speaking() {
-        this.startAnimation("touch_Mouth", "base");
+        let m = this.model.motions.get('Touch_Mouth');
+        if (!m) {
+            return;
+        }
+        let l = this.model.animator.getLayer('base');
+        if (!l) {
+            return;
+        }
+        l.play(m);
     }
+
+    stopSpeaking() {
+        let m = this.model.motions.get('Idle');
+        if (!m) {
+            return;
+        }
+        let l = this.model.animator.getLayer('base');
+        if (!l) {
+            return;
+        }
+        l.play(m);
+    }
+
 
 
     isHit(id, posX, posY) {
