@@ -4,8 +4,16 @@ $(document).ready(() => {
     v = new Viewer('model');
 });
 
+
 const onSpeaking = () => {
+    console.log('nói');
     v.speaking();
+}
+
+const stopSpeaking = () => {
+    console.log('dừng nói');
+
+    v.stopSpeaking();
 }
 
 class Viewer {
@@ -282,7 +290,27 @@ class Viewer {
     }
 
     speaking() {
-        this.startAnimation("touch_Mouth", "base");
+        let m = this.model.motions.get('touch_Mouth');
+        if (!m) {
+            return;
+        }
+        let l = this.model.animator.getLayer('base');
+        if (!l) {
+            return;
+        }
+        l.play(m);
+    }
+
+    stopSpeaking() {
+        let m = this.model.motions.get('idle');
+        if (!m) {
+            return;
+        }
+        let l = this.model.animator.getLayer('base');
+        if (!l) {
+            return;
+        }
+        l.play(m);
     }
 
 
