@@ -6,13 +6,10 @@ $(document).ready(() => {
 
 
 const onSpeaking = () => {
-    console.log('nói');
     v.speaking();
 }
 
 const stopSpeaking = () => {
-    console.log('dừng nói');
-
     v.stopSpeaking();
 }
 
@@ -312,7 +309,6 @@ class Viewer {
         }
         l.play(m);
     }
-
 
     isHit(id, posX, posY) {
         if (!this.model) {
