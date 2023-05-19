@@ -135,6 +135,21 @@
 			"Id": "ParamHairBack",
 			"GroupId": "",
 			"Name": "Hair Move Back"
+		},
+		{
+			"Id": "Param2",
+			"GroupId": "",
+			"Name": "Arm R"
+		},
+		{
+			"Id": "Param",
+			"GroupId": "",
+			"Name": "Arm L"
+		},
+		{
+			"Id": "Param3",
+			"GroupId": "",
+			"Name": "HandLeft"
 		}
 	],
 	"ParameterGroups": [],
@@ -152,12 +167,24 @@
 			"Name": "mouth"
 		},
 		{
+			"Id": "Part11",
+			"Name": "Cat-Character-3.psd (Corresponding layer not found)"
+		},
+		{
 			"Id": "Part3",
 			"Name": "ngon chan - R"
 		},
 		{
 			"Id": "Part4",
 			"Name": "ngon chan - L"
+		},
+		{
+			"Id": "Part7",
+			"Name": "Tay tach P"
+		},
+		{
+			"Id": "Part8",
+			"Name": "Tay tach T"
 		}
 	],
 	"CombinedParameters": [

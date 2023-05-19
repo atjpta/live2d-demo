@@ -125,28 +125,14 @@ class Viewer {
             const y = event.offsetY
             if (this.isClick) {
                 if (this.isHit('head', event.offsetX, event.offsetY)) {
-                    this.startAnimation("touch_Mouth", "base");
+                    this.startAnimation("Touch_Mouth", "base");
                 }
-                else if (this.isHit('ArtMesh8', x, y)) {
-                    this.startAnimation("touch_Arm", "base");
+                else {
+                    const bodyMotions = ["Touch_Body", "Touch_Hand"];
+                    let currentMotion = bodyMotions[Math.floor(Math.random() * bodyMotions.length)];
+                    this.startAnimation(currentMotion, "base");
                 }
-                else if (this.isHit('ArtMesh9', x, y)) {
-                    this.startAnimation("touch_Arm", "base");
-                }
-                else if (this.isHit('body', event.offsetX, event.offsetY)) {
-                    this.startAnimation("touch_Body", "base");
-                }
-
-                // else if (this.isHit('TouchSpecial', event.offsetX, event.offsetY)) {
-                //     this.startAnimation("touch_special", "base");
-                // }
-                // else {
-                //     const bodyMotions = ["touch_body", "touch_Body", "touch_Body", "touch_Body"];
-                //     let currentMotion = bodyMotions[Math.floor(Math.random() * bodyMotions.length)];
-                //     this.startAnimation(currentMotion, "base");
-                // }
             }
-
             this.isClick = false;
             this.model.inDrag = false;
 
@@ -160,28 +146,16 @@ class Viewer {
             const y = event.changedTouches[0].pageY
             if (this.isClick) {
                 if (this.isHit('head', x, y)) {
-                    this.startAnimation("touch_Mouth", "base");
+                    this.startAnimation("Touch_Mouth", "base");
                 }
-                else if (this.isHit('body', x, y)) {
-                    this.startAnimation("touch_Body", "base");
+                else {
+                    const bodyMotions = ["Touch_Body", "Touch_Hand"];
+                    let currentMotion = bodyMotions[Math.floor(Math.random() * bodyMotions.length)];
+                    this.startAnimation(currentMotion, "base");
+                    console.log(Touch_body);
                 }
-                else if (this.isHit('ArtMesh8', x, y)) {
-                    this.startAnimation("touch_Arm", "base");
-                }
-                else if (this.isHit('ArtMesh9', x, y)) {
-                    this.startAnimation("touch_Arm", "base");
-                }
-                // else if (this.isHit('TouchSpecial', event.changedTouches[0].pageX, event.changedTouches[0].pageY)) {
-                //     this.startAnimation("touch_special", "base");
-                // }
-                // else {
-                //     const bodyMotions = ["touch_body", "touch_Body", "touch_Body", "touch_Body"];
-                //     let currentMotion = bodyMotions[Math.floor(Math.random() * bodyMotions.length)];
-                //     this.startAnimation(currentMotion, "base");
-                //     console.log(touch_body);
-                // }
             }
-
+            console.log(currentMotion);
             this.isClick = false;
             this.model.inDrag = false;
         });
@@ -220,7 +194,7 @@ class Viewer {
         let deltaTime = 0.016 * delta;
 
         if (!this.animator.isPlaying) {
-            let m = this.motions.get("idle");
+            let m = this.motions.get("Idle");
             this.animator.getLayer("base").play(m);
         }
         this._animator.updateAndEvaluate(deltaTime);
@@ -287,7 +261,7 @@ class Viewer {
     }
 
     speaking() {
-        let m = this.model.motions.get('touch_Mouth');
+        let m = this.model.motions.get('Touch_Mouth');
         if (!m) {
             return;
         }
@@ -299,7 +273,7 @@ class Viewer {
     }
 
     stopSpeaking() {
-        let m = this.model.motions.get('idle');
+        let m = this.model.motions.get('Idle');
         if (!m) {
             return;
         }

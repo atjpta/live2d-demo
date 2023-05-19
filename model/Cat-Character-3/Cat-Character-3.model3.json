@@ -10,16 +10,16 @@
 		"Motions": {
 			"": [
 				{
-					"File": "motions/idle.motion3.json"
+					"File": "motions/Idle.motion3.json"
 				},
 				{
-					"File": "motions/touch_Body.motion3.json"
+					"File": "motions/Touch_Body.motion3.json"
 				},
 				{
-					"File": "motions/touch_Mouth.motion3.json"
+					"File": "motions/Touch_Mouth.motion3.json"
 				},
 				{
-					"File": "motions/touch_Arm.motion3.json"
+					"File": "motions/Touch_Hand.motion3.json"
 				}
 			]
 		}
@@ -27,23 +27,13 @@
 	"Groups": [
 		{
 			"Target": "Parameter",
-			"Name": "LipSync",
+			"Name": "EyeBlink",
 			"Ids": []
 		},
 		{
 			"Target": "Parameter",
-			"Name": "EyeBlink",
+			"Name": "LipSync",
 			"Ids": []
-		}
-	],
-	"HitAreas": [
-		{
-			"Id": "HitAreaHead",
-			"Name": "Head"
-		},
-		{
-			"Id": "HitAreaBody",
-			"Name": "Body"
 		}
 	]
 }
