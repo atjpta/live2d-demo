@@ -155,7 +155,6 @@ class Viewer {
                     console.log(Touch_body);
                 }
             }
-            console.log(currentMotion);
             this.isClick = false;
             this.model.inDrag = false;
         });
